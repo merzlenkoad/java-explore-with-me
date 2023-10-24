@@ -15,8 +15,6 @@ services:
   stats-db:
     image: postgres:latest
     container_name: stats-db
-    volumes:
-      - /var/lib/postgresql/data/
     ports:
       - "6541:5432"
     environment:
@@ -27,8 +25,6 @@ services:
   ewm-db:
     image: postgres:latest
     container_name: ewm-db
-    volumes:
-      - /var/lib/postgresql/data/
     ports:
       - "6542:5432"
     environment:

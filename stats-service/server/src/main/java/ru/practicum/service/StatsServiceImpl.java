@@ -11,7 +11,6 @@ import ru.practicum.EndpointHitDto;
 
 import ru.practicum.ViewStatsDto;
 
-import javax.validation.ValidationException;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -31,7 +30,6 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public List<ViewStatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        if (!end.isBefore(start)) {
             if (unique) {
                 if (uris == null) {
                     return statsRepository.findStatsByUniqueWithoutUris(start, end);
@@ -43,8 +41,5 @@ public class StatsServiceImpl implements StatsService {
                 }
                 return statsRepository.findStats(start, end, uris);
             }
-        } else {
-            throw new ValidationException("The end time cannot be earlier than the start time!");
-        }
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
+import static ru.practicum.constant.Constants.DATE_FORMAT;
 
 @Slf4j
 @RestController
@@ -29,9 +30,9 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public ResponseEntity<List<ViewStatsDto>> getStats(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public ResponseEntity<List<ViewStatsDto>> getStats(@RequestParam @DateTimeFormat(pattern = DATE_FORMAT)
                                                        LocalDateTime start,
-                                                       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+                                                       @RequestParam @DateTimeFormat(pattern = DATE_FORMAT)
                                                        LocalDateTime end,
                                                        @RequestParam(name = "uris", required = false) List<String> uris,
                                                        @RequestParam(name = "unique", defaultValue = "false")

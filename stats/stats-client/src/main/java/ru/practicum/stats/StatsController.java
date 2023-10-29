@@ -34,7 +34,7 @@ public class StatsController {
                                          @RequestParam(name = "start") String start,
                                          @RequestParam(name = "end") String end,
                                          @RequestParam(required = false, name = "uris") String[] uris,
-                                         @RequestParam(name = "unique", defaultValue = "false") boolean unique) throws UnsupportedEncodingException {
+                                         @RequestParam(name = "unique", defaultValue = "false") boolean unique) {
         log.info("Get stats");
         String ipResource = request.getRemoteAddr();
         return statsClient.getStats(ipResource, start, end, uris, unique);

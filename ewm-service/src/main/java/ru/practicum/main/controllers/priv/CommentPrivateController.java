@@ -55,7 +55,7 @@ public class CommentPrivateController {
     }
 
     @GetMapping("/events/{eventId}/comments")
-    public ResponseEntity<List<CommentDto> > getComments(HttpServletRequest request,
+    public ResponseEntity<List<CommentDto>> getComments(HttpServletRequest request,
                                                          @PathVariable Long eventId,
                                                          @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
                                                          @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {

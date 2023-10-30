@@ -42,9 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public CategoryDto updateCategoryAdmin(Long catId, NewCategoryDto newCategoryDto) {
-        if (categoryRepository.findCategoryById(catId) == null) {
-            throw new NotFoundException("Category not found.");
-        }
+        getCategoryByIdIfExist(catId);
         Category newCategory = CategoryMapper.toCategory(newCategoryDto);
         newCategory.setId(catId);
         CategoryDto categoryDto;
@@ -59,9 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public void deleteCategoryAdmin(Long catId) {
-        if (categoryRepository.getById(catId) == null) {
-            throw new NotFoundException("Category not found.");
-        }
+        getCategoryByIdIfExist(catId);
         if (eventRepository.findFirstByCategoryId(catId) != null) {
             throw new ValidationCategoryException("The category has not been deleted.");
         }
@@ -84,10 +80,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public CategoryDto getCategoryByIdPublic(Long catId) {
-        Category category = categoryRepository.findCategoryById(catId);
-        if (category == null) {
-            throw new NotFoundException("The required object was not found.");
+        return CategoryMapper.toCategoryDto(getCategoryByIdIfExist(catId));
+    }
+
+    public Category getCategoryByIdIfExist(Long catId) {
+        if (categoryRepository.findCategoryById(catId) == null) {
+            throw new NotFoundException("Category not found.");
         }
-        return CategoryMapper.toCategoryDto(category);
+        return categoryRepository.findCategoryById(catId);
     }
 }

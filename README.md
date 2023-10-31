@@ -10,7 +10,7 @@ https://github.com/merzlenkoad/java-explore-with-me/pull/5
 Данное приложение — это афиша,
 в которой можно предложить какое-либо событие от выставки до похода в кино и собрать компанию для участия в нём.
 ___
-Технологии : Maven, Spring-boot, jpa-hibernate, Docker, PostgreSQL, Lombok
+Технологии : Maven, Spring-boot, jpa-hibernate, Docker, PostgreSQL, Lombok.
 ___
 
 Реализация основного сервиса.

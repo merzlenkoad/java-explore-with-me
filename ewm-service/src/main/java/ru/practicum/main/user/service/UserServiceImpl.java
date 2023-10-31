@@ -16,6 +16,7 @@ import ru.practicum.main.user.model.User;
 import ru.practicum.main.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -27,6 +28,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User getUserIfExist(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user == null) {
+            throw new NotFoundException("User is not exist.");
+        } else {
+            return user.get();
+        }
     }
 
     @Transactional

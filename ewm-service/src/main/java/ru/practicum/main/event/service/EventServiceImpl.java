@@ -43,6 +43,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static ru.practicum.main.constant.Constants.DATE_FORMAT;
@@ -57,6 +58,17 @@ public class EventServiceImpl implements EventService {
     private final ParticipationRepository participationRepository;
     private final LocationRepository locationRepository;
     private final StatsClient statsClient;
+
+
+    @Override
+    public Event getEventIfExist(Long eventId) {
+        Optional<Event> event = eventRepository.findById(eventId);
+        if (event == null) {
+            throw new NotFoundException("Event is not exist.");
+        } else {
+            return event.get();
+        }
+    }
 
     @Transactional
     @Override

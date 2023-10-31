@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor<Event> {
+
     List<Event> getEventsByCategoryIdIn(List<Long> categories, Pageable pageable);
 
 

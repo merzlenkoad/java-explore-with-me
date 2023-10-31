@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    List<Comment> getCommentByEventId(Long eventId, Pageable pageable);
+    List<Comment> getCommentsByEventId(Long eventId, Pageable pageable);
 
     Comment getCommentById(Long commentId);
 

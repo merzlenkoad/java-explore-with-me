@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS participations (
     text         VARCHAR(10000) NOT NULL,
     event_id     BIGINT         NOT NULL    CONSTRAINT fk_comments_events REFERENCES events ON DELETE CASCADE ON UPDATE CASCADE,
     author_id    BIGINT         NOT NULL    CONSTRAINT fk_comments_users REFERENCES users ON DELETE CASCADE ON UPDATE CASCADE,
-    created      TIMESTAMP      NOT NULL
+    created_on TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    updated_on TIMESTAMP WITHOUT TIME ZONE
 );
 
 CREATE TABLE IF NOT EXISTS events_compilations (

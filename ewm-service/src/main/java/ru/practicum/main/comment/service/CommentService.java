@@ -1,19 +1,24 @@
 package ru.practicum.main.comment.service;
 
 import ru.practicum.main.comment.dto.CommentDto;
+import ru.practicum.main.comment.dto.CommentWithFullAuthorDto;
 
 import java.util.List;
 
 public interface CommentService {
-    CommentDto addCommentByUser(CommentDto commentDto);
+    CommentDto addCommentForUser(CommentDto commentDto);
 
-    void deleteCommentByIdByUser(Long userId, Long commentId);
+    CommentDto updateCommentForUser(Long commentId, CommentDto commentDto);
 
-    CommentDto updateCommentByUser(Long commentId, CommentDto commentDto);
+    List<CommentDto> getCommentsForUser(Long eventId, Integer from, Integer size);
 
-    List<CommentDto> getComments(Long eventId, Integer from, Integer size);
+    CommentDto getCommentByIdForUser(Long commentId);
 
-    CommentDto getCommentById(Long commentId);
+    void deleteCommentByIdForUser(Long userId, Long commentId);
 
-    void deleteCommentByIdAdmin(Long userId, Long commentId);
+    List<CommentWithFullAuthorDto> getCommentsForAdmin(Long eventId, Integer from, Integer size);
+
+    CommentWithFullAuthorDto getCommentByIdForAdmin(Long commentId);
+
+    void deleteCommentByIdForAdmin(Long userId, Long commentId);
 }

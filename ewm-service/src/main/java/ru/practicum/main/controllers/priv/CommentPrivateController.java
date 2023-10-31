@@ -33,42 +33,42 @@ public class CommentPrivateController {
     private final CommentService commentService;
 
     @PostMapping("/comments")
-    public ResponseEntity<CommentDto> addComment(HttpServletRequest request,
+    public ResponseEntity<CommentDto> addCommentForUser(HttpServletRequest request,
                                                 @NonNull @RequestBody CommentDto commentDto) {
         log.info("Post request received: add comment.");
-        return new ResponseEntity<>(commentService.addCommentByUser(commentDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(commentService.addCommentForUser(commentDto), HttpStatus.CREATED);
     }
 
     @PatchMapping("/comments/{commentId}")
-    public ResponseEntity<CommentDto> updateComment(HttpServletRequest request,
+    public ResponseEntity<CommentDto> updateCommentForUser(HttpServletRequest request,
                                            @Positive @PathVariable Long commentId,
                                            @Valid @RequestBody CommentDto commentDto) {
         log.info("Patch request received: update comment by user.");
-        return new ResponseEntity<>(commentService.updateCommentByUser(commentId, commentDto), HttpStatus.OK);
+        return new ResponseEntity<>(commentService.updateCommentForUser(commentId, commentDto), HttpStatus.OK);
     }
 
     @GetMapping("/comments/{commentId}")
-    public ResponseEntity<CommentDto> getCommentById(HttpServletRequest request,
+    public ResponseEntity<CommentDto> getCommentByIdForUser(HttpServletRequest request,
                                      @Positive @PathVariable Long commentId) {
         log.info("Get request received: get comment by id.");
-        return new ResponseEntity<>(commentService.getCommentById(commentId), HttpStatus.OK);
+        return new ResponseEntity<>(commentService.getCommentByIdForUser(commentId), HttpStatus.OK);
     }
 
     @GetMapping("/events/{eventId}/comments")
-    public ResponseEntity<List<CommentDto>> getComments(HttpServletRequest request,
+    public ResponseEntity<List<CommentDto>> getCommentsForUser(HttpServletRequest request,
                                                          @PathVariable Long eventId,
                                                          @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
                                                          @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
         log.info("Get request received: get all comment by user.");
-        return new ResponseEntity<>(commentService.getComments(eventId, from, size), HttpStatus.OK);
+        return new ResponseEntity<>(commentService.getCommentsForUser(eventId, from, size), HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/users/{userId}/comments/{commentId}")
-    public void deleteCommentByUser(HttpServletRequest request,
+    public void deleteCommentByIdForUser(HttpServletRequest request,
                            @Positive @PathVariable Long userId,
                            @Positive @PathVariable Long commentId) {
         log.info("Delete request received: delete comment by user.");
-        commentService.deleteCommentByIdByUser(userId, commentId);
+        commentService.deleteCommentByIdForUser(userId, commentId);
     }
 }
